@@ -15,7 +15,6 @@ int clasificarChar (char unChar){
 	return a;
 };
 int main()
-         //int argc, char const *argv[])
 {
 	int productions[7][7] = {
 		{2,1,1,6,6,6},
@@ -33,11 +32,10 @@ int main()
 	FILE *archivoDeEntrada = fopen( "archivoDeEntrada.txt", "r" );
 	FILE *archivoDeSalida = fopen( "archivoDeSalida.txt", "w" );
 
-	while(!feof(archivoDeEntrada)){ //Entra en bucle infinito (no termina al menos que se depure, y escribe repetidas veces “0x” en el archivo.
-		char nextChar; //proxima letra del archivo, DECLARARLO
-		//algo con fread sizeof(char)*1,1, SEEK_CUR
+	while(!feof(archivoDeEntrada)){ 
+		char nextChar; 
 		fread(&nextChar, 1, 1, archivoDeEntrada);
-		while (nextChar != 32){
+		while ((nextChar != 32)&&(!feof(archivoDeEntrada))){
             		currentStatus = productions [currentStatus][clasificarChar(nextChar)];
             		fwrite(&nextChar,1, 1, archivoDeSalida);
 			fread(&nextChar, 1, 1, archivoDeEntrada);
